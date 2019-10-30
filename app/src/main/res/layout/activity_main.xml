@@ -2,11 +2,69 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_animation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/breath"
-    android:id="@+id/layout_animation"
     tools:context="com.example.tomcat.MainActivity">
+
+    <Button
+        android:id="@+id/btn_pokeBelly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="140dp"
+        android:alpha="0"
+        android:text=""
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="378dp" />
+
+    <Button
+        android:id="@+id/btn_foot"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_alignEnd="@+id/btn_pokeBelly"
+        android:layout_alignRight="@+id/btn_pokeBelly"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="55dp"
+        android:alpha="0"
+        android:text="" />
+
+    <Button
+        android:id="@+id/btn_weiba"
+        android:layout_width="50dp"
+        android:layout_height="90dp"
+        android:layout_above="@+id/btn_foot"
+        android:layout_marginStart="19dp"
+        android:layout_marginLeft="19dp"
+        android:layout_toEndOf="@+id/btn_pokeBelly"
+        android:layout_toRightOf="@+id/btn_pokeBelly"
+        android:alpha="0"
+        android:text="" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_pokeBelly"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="225dp">
+
+        <Button
+            android:id="@+id/btn_leftFace"
+            android:layout_width="60dp"
+            android:layout_height="90dp"
+            android:alpha="0"
+            android:text="" />
+        <Button
+            android:id="@+id/btn_rightFace"
+            android:layout_width="60dp"
+            android:layout_height="90dp"
+            android:layout_marginLeft="35dp"
+            android:alpha="0"
+            android:text=""
+            android:layout_toRightOf="@id/btn_leftFace"/>
+    </RelativeLayout>
 
 
 </RelativeLayout>
