@@ -1,8 +1,10 @@
 package com.example.tomcat;
 
 import android.graphics.drawable.AnimationDrawable;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,7 +53,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initHashMap() {
         hashMap = new HashMap<Integer, Integer>();
-        pool = new SoundPool(3, AudioManager.STREAM_MUSIC, 1);//同时播放最大数量 类型 音质
+        //SoundPool需要分版本进行处理（sdk版本21前后）
+        if (Build.VERSION.SDK_INT >= 21) {
+            SoundPool.Builder builder = new SoundPool.Builder();
+            //传入最多播放音频数量,
+            builder.setMaxStreams(1);
+            //AudioAttributes是一个封装音频各种属性的方法
+            AudioAttributes.Builder attrBuilder = new AudioAttributes.Builder();
+            //设置音频流的合适的属性
+            attrBuilder.setLegacyStreamType(AudioManager.STREAM_MUSIC);
+            //加载一个AudioAttributes
+            builder.setAudioAttributes(attrBuilder.build());
+            pool = builder.build();
+        } else {
+            pool = new SoundPool(3, AudioManager.STREAM_MUSIC, 1);//同时播放最大数量 类型 音质
+        }
         //将音乐加载到集合中
         hashMap.put(1, pool.load(this, R.raw.fart003_11025, 1));
         hashMap.put(2, pool.load(this, R.raw.cymbal, 1));
@@ -95,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void playAnimation(int res) {
         layout_animation.setBackgroundResource(res);
         AnimationDrawable anim = (AnimationDrawable) layout_animation.getBackground();
-        anim.setOneShot(true);//播放一次
+        anim.setOneShot(true);//是否播放一次(true将循环一次，然后停止并保持最后一帧。如果它设置为false，则动画将循环)
         if (anim.isRunning()) {//如果动画已经播放过
             anim.stop();//如果动画运行了，停止动画，动画才可以重新播放
         }
